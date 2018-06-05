@@ -12,6 +12,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.net.ssl.HttpsURLConnection;
 
@@ -164,6 +166,23 @@ public class Test {
         System.out.println(sb);
 
     }
+    
+    volatile int i;
+    public void add(){
+        i++;     // 如果多线程循环调用add,就会涉及到一个复合操作，先要读取i，然后对i进行加一，最后把i的值写入内存
+    }
+    
+    public void test2(){
+        synchronized(Test.class){
+            
+            
+            
+        }
+    }
+    
+    
+    
+    ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     public static void main(String[] args) throws ClassNotFoundException {
         test1();
